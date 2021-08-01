@@ -1,0 +1,22 @@
+.movies {
+  min-height: 100vh;
+  background-color: #202020;
+}
+
+.movies__content {
+  max-width: 1140px;
+  padding: 0 70px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .movies__content {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .movies__content {
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,23 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #202020;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 480px) {
+  .login {
+    align-items: flex-start;
+  }
+}
+
+.login__button {
+  margin-top: 197px;
+}
+
+@media screen and (max-width: 480px) {
+  .login__button {
+    margin-top: 285px;
+  }
+}

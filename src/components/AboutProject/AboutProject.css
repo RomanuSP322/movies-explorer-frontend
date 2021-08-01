@@ -1,0 +1,144 @@
+.about-project {
+  max-width: 1140px;
+  width: 100%;
+  padding-top: 70px;
+}
+
+@media screen and (max-width: 480px) {
+  .about-project {
+    padding-top: 70px;
+  }
+}
+
+.about-project__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 110px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__list {
+    gap: 30px;
+    margin: 0 0 90px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__list {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 56px;
+    margin: 0 0 60px;
+  }
+}
+
+.about-project__subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0 0 26px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__subtitle {
+    margin: 0 0 22px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px;
+  }
+}
+
+.about-project__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.about-project__time-line {
+  display: grid;
+  grid-template-rows: 36px 36px;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__time-line {
+    grid-template-columns: 25fr 46fr;
+  }
+}
+
+.about-project__time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__time {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
+
+.about-project__time_type_short {
+  background-color: #3ddc84;
+  color: #000000;
+}
+
+.about-project__time_type_long {
+  background-color: #303030;
+  color: #ffffff;
+}
+
+.about-project__task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8b8b8b;
+  margin: 14px 0 0;
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__task {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 10px 0 0;
+  }
+}
