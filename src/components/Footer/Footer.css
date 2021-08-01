@@ -80,6 +80,7 @@
   color: #ffffff;
   cursor: pointer;
   text-decoration: none;
+  transition: opacity .5s;
 }
 
 .footer__link:hover {

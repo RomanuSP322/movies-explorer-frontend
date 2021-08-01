@@ -86,6 +86,7 @@
   line-height: 17px;
   box-sizing: border-box;
   border: none;
+  transition: opacity .5s;
 }
 
 .form__button:hover {
@@ -115,6 +116,7 @@
   cursor: pointer;
   text-decoration: none;
   padding-left: 6px;
+  transition: opacity .5s;
 }
 
 .form__link:hover {

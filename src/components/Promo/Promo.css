@@ -108,6 +108,7 @@
 @media screen and (max-width: 900px) {
   .promo__link {
     text-align: center;
+    transition: opacity .5s;
   }
 }
 

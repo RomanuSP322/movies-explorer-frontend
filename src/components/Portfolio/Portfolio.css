@@ -40,7 +40,13 @@
   letter-spacing: -0.04em;
   color: #ffffff;
   margin: 0;
+  transition: opacity .5s;
 }
+
+.portfolio__link:hover {
+  opacity: 0.6;
+}
+
 
 @media screen and (max-width: 768px) {
   .portfolio__link {
@@ -55,6 +61,3 @@
   }
 }
 
-.portfolio__link:hover {
-  opacity: 0.6;
-}

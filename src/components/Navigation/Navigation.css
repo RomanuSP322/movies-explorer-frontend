@@ -100,6 +100,7 @@
   align-items: center;
   justify-content: center;
   margin: 0;
+  transition: opacity .5s;
 }
 
 .navigation__link:hover {
@@ -194,6 +195,7 @@
   background-image: url(../../images/menu__icon.svg);
   background-position: center;
   cursor: pointer;
+  transition: opacity .5s;
 }
 
 .navigation__button_type_burger:hover {
@@ -213,6 +215,7 @@
   background-image: url(../../images/close__icon.svg);
   background-position: center;
   cursor: pointer;
+  transition: opacity .5s;
 }
 
 @media screen and (max-width: 600px) {

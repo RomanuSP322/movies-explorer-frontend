@@ -97,6 +97,7 @@
   padding: 0;
   cursor: pointer;
   text-decoration: none;
+  transition: opacity .5s;
 }
 
 .profile__button:hover {

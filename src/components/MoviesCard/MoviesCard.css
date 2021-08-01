@@ -12,6 +12,7 @@
 .movies-card__link {
   grid-area: poster;
   margin-bottom: 14px;
+  transition: opacity .5s;
 }
 
 .movies-card__link:hover {
@@ -75,6 +76,7 @@
   background-color: #313131;
   cursor: pointer;
   justify-self: right;
+  transition: opacity .5s;
 }
 
 .movies-card__button:hover {

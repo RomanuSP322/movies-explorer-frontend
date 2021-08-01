@@ -47,6 +47,7 @@
   border: none;
   background-color: #2f2f2f;
   cursor: pointer;
+  transition: opacity .5s;
 }
 
 .cards-list__button:hover {
