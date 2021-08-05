@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  align-items: center;
+  max-width: 1140px;
+  background-color: transparent;
+  padding: 14px 70px;
+  gap: 44px;
+  position: relative;
+  height: 44px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 14px 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 14px 14px;
+  }
+}
