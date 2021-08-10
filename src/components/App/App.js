@@ -66,10 +66,10 @@ function App() {
   function getBeatMovies() {
     setIsLoading(true);
     moviesApi
-    .getMovies()
+      .getMovies()
       .then((data) => {
         const beatMovies = data;
-          localStorage.setItem('allMovies', JSON.stringify(beatMovies));
+        localStorage.setItem('allMovies', JSON.stringify(beatMovies));
         setMoviesStatus('');
       })
       .catch(() => {
@@ -276,7 +276,7 @@ function App() {
   useEffect(() => {
     tokenCheck();
     getBeatMovies();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -291,7 +291,7 @@ function App() {
   useEffect(() => {
     getCurrentUser(token);
     getSavedMovies(token);
-    getBeatMovies()
+    getBeatMovies();
     setMovies([]);
     const localMovies = JSON.parse(localStorage.getItem('movies'));
     if (localMovies) {
