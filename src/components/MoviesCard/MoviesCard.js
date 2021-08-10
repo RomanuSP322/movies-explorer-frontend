@@ -8,13 +8,11 @@ function MoviesCard({ movie, onSaveMovie, onDeleteMovie, isMovieSaved }) {
 
   function handleLikeClick() {
     setIsLiked(!isLiked);
-    console.log(movie);
     onSaveMovie(movie);
   }
 
   function handleDeleteClick() {
     setIsLiked(!isLiked);
-    console.log(movie);
     onDeleteMovie(movie);
   }
 
