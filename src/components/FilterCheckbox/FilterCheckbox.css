@@ -42,25 +42,21 @@
   content: '';
   position: absolute;
   top: 2px;
-  right: 2px;
+  left: 2px;
   width: 16px;
   height: 16px;
-  background: #2be080;
+  background: #ffffff;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   border-radius: 16px;
   transition: 0.3s;
 }
 
-.filter-checkbox__input:checked + .filter-checkbox__label:after {
-  background: #ffffff;
-}
 
-.filter-checkbox__input:checked + .filter-checkbox__label:after {
+
+.filter-checkbox__label_active:after {
+  background: #2be080;
   right: calc(100% - 2px);
   transform: translateX(100%);
 }
 
-.filter-checkbox__label:active:after {
-  width: 10px;
-}

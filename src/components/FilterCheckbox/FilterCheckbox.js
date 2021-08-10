@@ -1,7 +1,11 @@
 import React from 'react';
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ onClickBox, filterOn }) {
+  const checkBoxClassName = `filter-checkbox__label ${
+    filterOn ? `filter-checkbox__label_active` : null
+  }`;
+
   return (
     <div className='filter-checkbox'>
       <h2 className='filter-checkbox__title'>Короткометражки</h2>
@@ -11,7 +15,11 @@ function FilterCheckbox() {
         name='short-film'
         id='checkbox'
       />
-      <label htmlFor='checkbox' className='filter-checkbox__label'></label>
+      <label
+        htmlFor='checkbox'
+        className={checkBoxClassName}
+        onClick={onClickBox}
+      ></label>
     </div>
   );
 }

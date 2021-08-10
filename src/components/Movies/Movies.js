@@ -6,13 +6,41 @@ import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Movies({ isLoading }) {
+function Movies({
+  loggedIn,
+  allMovies,
+  onSaveMovie,
+  onDeleteMovie,
+  isMovieSaved,
+  savedMovies,
+  filterShortFilm,
+  filterOn,
+  onFilter,
+  searchHandler,
+  isLoading,
+  moviesStatus,
+}) {
   return (
     <div className='movies'>
-      <Header loggedIn={true} />
+      <Header loggedIn={loggedIn} />
       <main className='movies__content'>
-        <SearchForm />
-        {isLoading ? <Preloader /> : <MoviesCardList />}
+        <SearchForm
+          onFilter={onFilter}
+          onSearch={searchHandler}
+          filterOn={filterOn}
+        />
+        {moviesStatus && <h3 className='movies_status'>{moviesStatus}</h3>}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            movies={filterOn ? filterShortFilm(allMovies) : allMovies}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
+            isMovieSaved={isMovieSaved}
+            savedMovies={savedMovies}
+          />
+        )}
       </main>
       <Footer />
     </div>
