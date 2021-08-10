@@ -64,6 +64,7 @@ function App() {
   };
 
   function getCurrentUser(jwt) {
+    if (jwt) {
     apiAuth
     .getContent(jwt)
     .then(() => {
@@ -77,6 +78,7 @@ function App() {
         });
     })
   }
+}
 
   function handleRegister(data) {
     return apiAuth
