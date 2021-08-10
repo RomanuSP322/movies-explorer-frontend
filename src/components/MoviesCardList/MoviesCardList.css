@@ -1,6 +1,7 @@
 .cards-list {
   max-width: 100%;
   padding: 70px 0 80px;
+
 }
 
 @media screen and (max-width: 480px) {
@@ -11,7 +12,7 @@
 
 .cards-list__list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, max-content));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   grid-column-gap: 18px;
   grid-row-gap: 38px;
   justify-content: center;
@@ -20,9 +21,10 @@
   padding: 0;
 }
 
+
 @media screen and (max-width: 768px) {
   .cards-list__list {
-    grid-template-columns: repeat(auto-fill, minmax(339px, max-content));
+    grid-template-columns: repeat(auto-fill, minmax(339px, 1fr));
     grid-column-gap: 30px;
     grid-row-gap: 30px;
   }

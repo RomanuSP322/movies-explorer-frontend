@@ -27,6 +27,7 @@
 .navigation__menu_type_header {
   width: 100%;
   padding-left: 0;
+  align-self: center;
 }
 
 .navigation__menu_type_burger {
