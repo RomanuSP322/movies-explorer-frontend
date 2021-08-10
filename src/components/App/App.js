@@ -270,6 +270,8 @@ function App() {
   }
 
   useEffect(() => {
+    const savedMoviesArr = JSON.parse(localStorage.getItem('savedMovies'));
+    setSavedMovies(savedMoviesArr);
     setMoviesStatus('');
   }, [location]);
 
