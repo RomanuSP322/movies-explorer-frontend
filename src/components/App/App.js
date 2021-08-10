@@ -63,6 +63,21 @@ function App() {
       .finally(() => setIsAppLoading(false));
   };
 
+  function getCurrentUser(jwt) {
+    apiAuth
+    .getContent(jwt)
+    .then(() => {
+      api
+        .getUserInfo(jwt)
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+  }
+
   function handleRegister(data) {
     return apiAuth
       .register(data)
@@ -283,6 +298,7 @@ function App() {
   }, [isLoggedIn, location, history]);
 
   useEffect(() => {
+    getCurrentUser(token);
     getSavedMovies(token);
   }, [token]);
 
