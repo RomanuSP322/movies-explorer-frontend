@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
 import { api } from '../../utils/MainApi';
-import getMovies from '../../utils/MoviesApi';
+import { moviesApi } from '../../utils/MoviesApi';
 import * as apiAuth from '../../utils/AuthApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -61,24 +61,71 @@ function App() {
         setMoviesStatus('Что-то пошло не так! Попробуйте ещё раз.');
       })
       .finally(() => setIsAppLoading(false));
-  };
+  }
+
+  function getBeatMovies() {
+    setIsLoading(true);
+    moviesApi
+    .getMovies()
+      .then((data) => {
+        const beatMovies = data;
+          localStorage.setItem('allMovies', JSON.stringify(beatMovies));
+        setMoviesStatus('');
+      })
+      .catch(() => {
+        localStorage.removeItem('movies');
+        setMoviesStatus(
+          'Во время запроса произошла ошибка. ' +
+            'Возможно, проблема с соединением или сервер недоступен. ' +
+            'Подождите немного и попробуйте ещё раз'
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function getSavedMovies(token) {
+    if (token) {
+      setIsAppLoading(true);
+      api
+        .getCards(token)
+        .then((data) => {
+          const savedArray = data.map((item) => ({
+            ...item,
+            id: item.movieId,
+          }));
+          localStorage.setItem('savedMovies', JSON.stringify(savedArray));
+          setSavedMovies(savedArray);
+          setMoviesStatus('');
+        })
+        .catch(() => {
+          localStorage.removeItem('savedMovies');
+          setSavedMovies([]);
+          setMoviesStatus(
+            'Во время запроса произошла ошибка. ' +
+              'Возможно, проблема с соединением или сервер недоступен. ' +
+              'Подождите немного и попробуйте ещё раз'
+          );
+        })
+        .finally(() => setIsAppLoading(false));
+    }
+  }
 
   function getCurrentUser(jwt) {
     if (jwt) {
-    apiAuth
-    .getContent(jwt)
-    .then(() => {
-      api
-        .getUserInfo(jwt)
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
+      apiAuth.getContent(jwt).then(() => {
+        api
+          .getUserInfo(jwt)
+          .then((userData) => {
+            setCurrentUser(userData);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    }
   }
-}
 
   function handleRegister(data) {
     return apiAuth
@@ -135,54 +182,6 @@ function App() {
     setStatusInfo('');
   }
 
-  function getBeatMovies() {
-    setIsLoading(true);
-    getMovies()
-      .then((data) => {
-        const beatMovies = data;
-        localStorage.setItem('allMovies', JSON.stringify(beatMovies));
-        setMoviesStatus('');
-      })
-      .catch(() => {
-        localStorage.removeItem('movies');
-        setMoviesStatus(
-          'Во время запроса произошла ошибка. ' +
-            'Возможно, проблема с соединением или сервер недоступен. ' +
-            'Подождите немного и попробуйте ещё раз'
-        );
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  function getSavedMovies(token) {
-    if (token) {
-      setIsAppLoading(true);
-      api
-        .getCards(token)
-        .then((data) => {
-          const savedArray = data.map((item) => ({
-            ...item,
-            id: item.movieId,
-          }));
-          localStorage.setItem('savedMovies', JSON.stringify(savedArray));
-          setSavedMovies(savedArray);
-          setMoviesStatus('');
-        })
-        .catch(() => {
-          localStorage.removeItem('savedMovies');
-          setSavedMovies([]);
-          setMoviesStatus(
-            'Во время запроса произошла ошибка. ' +
-              'Возможно, проблема с соединением или сервер недоступен. ' +
-              'Подождите немного и попробуйте ещё раз'
-          );
-        })
-        .finally(() => setIsAppLoading(false));
-    }
-  };
-
   const handleSaveMovie = (item) => {
     const savedMovie = {
       ...item,
@@ -205,7 +204,6 @@ function App() {
   };
 
   const handleDeleteMovie = (item) => {
-    console.log(item);
     const movieId = item.id ? item.id : item.movieId;
     const deletedMovie = savedMovies.find((movie) => movieId === movie.movieId);
     if (!deletedMovie) {
@@ -224,8 +222,6 @@ function App() {
 
   const isMovieSaved = (movie) =>
     savedMovies.some((item) => item.movieId === movie.id);
-
-
 
   const handleShortFilm = (movies) =>
     movies.filter((item) => item.duration <= 40);
@@ -250,7 +246,7 @@ function App() {
     return [];
   };
 
-  const searchHandler = (searchReq) => {
+  function searchHandler(searchReq) {
     setMoviesStatus('');
     setIsLoading(true);
     setTimeout(() => {
@@ -258,9 +254,7 @@ function App() {
         const allMovies = JSON.parse(localStorage.getItem('allMovies'));
         if (!allMovies) {
           getBeatMovies();
-          const allMoviesFirsts = JSON.parse(localStorage.getItem('allMovies'));
-          const filteredMovies = searchFilter(allMoviesFirsts, searchReq);
-          localStorage.setItem('movies', JSON.stringify(filteredMovies));
+          const filteredMovies = searchFilter(movies, searchReq);
           setMovies(filteredMovies);
         } else {
           const filteredMovies = searchFilter(allMovies, searchReq);
@@ -273,25 +267,16 @@ function App() {
       }
       setIsLoading(false);
     }, 1000);
-  };
-
-  useEffect(() => {
-    tokenCheck();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }
 
   useEffect(() => {
     setMoviesStatus('');
   }, [location]);
 
   useEffect(() => {
-    const localMovies = JSON.parse(localStorage.getItem('movies'));
-    if (localMovies) {
-      setMovies(localMovies);
-    } else {
-      localStorage.removeItem('movies');
-      getBeatMovies();
-    }
+    tokenCheck();
+    getBeatMovies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -306,6 +291,14 @@ function App() {
   useEffect(() => {
     getCurrentUser(token);
     getSavedMovies(token);
+    getBeatMovies()
+    setMovies([]);
+    const localMovies = JSON.parse(localStorage.getItem('movies'));
+    if (localMovies) {
+      setMovies(localMovies);
+    } else {
+      localStorage.removeItem('movies');
+    }
   }, [token]);
 
   return (
