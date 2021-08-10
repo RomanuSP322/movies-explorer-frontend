@@ -258,6 +258,10 @@ function App() {
         const allMovies = JSON.parse(localStorage.getItem('allMovies'));
         if (!allMovies) {
           getBeatMovies();
+          const allMoviesFirsts = JSON.parse(localStorage.getItem('allMovies'));
+          const filteredMovies = searchFilter(allMoviesFirsts, searchReq);
+          localStorage.setItem('movies', JSON.stringify(filteredMovies));
+          setMovies(filteredMovies);
         } else {
           const filteredMovies = searchFilter(allMovies, searchReq);
           localStorage.setItem('movies', JSON.stringify(filteredMovies));
